@@ -1,4 +1,5 @@
 #!/bin/sh
+#http://www.cyberciti.biz/faq/howto-move-migrate-user-accounts-old-to-new-server/
 mkdir /root/move
 
 export UGIDLIMIT=500
@@ -12,5 +13,6 @@ awk -v LIMIT=$UGIDLIMIT -F: '($3>=LIMIT) && ($3!=65534)' /etc/group > /root/move
 #Create shadow file corresponding to user account
 awk -v LIMIT=$UGIDLIMIT -F: '($3>=LIMIT) && ($3!=65534) {print $1}' /etc/passwd | tee - |egrep -f - /etc/shadow > /root/move/shadow.mig 
 
+$TODO need to test
 #Create gshadow file corresponding to the group accounts
 awk -v LIMIT=$UGIDLIMIT -F: '($3>=LIMIT) && ($3!=65534) {print $1}' /etc/group | tee - |egrep -f - /etc/gshadow > /root/move/gshadow.mig
