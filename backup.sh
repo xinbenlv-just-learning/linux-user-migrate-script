@@ -16,3 +16,5 @@ awk -v LIMIT=$UGIDLIMIT -F: '($3>=LIMIT) && ($3!=65534) {print $1}' /etc/passwd 
 $TODO need to test
 #Create gshadow file corresponding to the group accounts
 awk -v LIMIT=$UGIDLIMIT -F: '($3>=LIMIT) && ($3!=65534) {print $1}' /etc/group | tee - |egrep -f - /etc/gshadow > /root/move/gshadow.mig
+
+
